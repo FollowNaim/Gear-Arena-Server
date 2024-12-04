@@ -25,13 +25,20 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
+    // await client.connect();
+    // await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
     const db = client.db("gear-arena");
     const productsCollection = db.collection("all-products");
+    const usersCollection = db.collection("users");
+
+    app.post("/users", async (req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+    });
 
     app.get("/limited-products", async (req, res) => {
       const cursor = productsCollection.find().limit(6);
