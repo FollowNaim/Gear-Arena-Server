@@ -53,8 +53,63 @@ async function run() {
       res.send(result);
     });
 
+    app.patch("/products/:id", async (req, res) => {
+      const product = req.body;
+      const result = await productsCollection.updateOne(
+        { _id: new ObjectId(req.params.id) },
+        {
+          $set: {
+            itemName: product.itemName,
+            categoryName: product.categoryName,
+            image: product.image,
+            description: product.description,
+            price: product.price,
+            rating: product.rating,
+            customization: product.customization,
+            processingTime: product.processingTime,
+            stockStatus: {
+              availability: product.stockStatus.availability,
+              quantity: product.stockStatus.quantity,
+            },
+          },
+        }
+      );
+      res.send(result);
+    });
+
     app.get("/all-products", async (req, res) => {
       const result = await productsCollection.find().toArray();
+      res.send(result);
+    });
+
+    app.post("/products", async (req, res) => {
+      const product = req.body;
+      const result = await productsCollection.insertOne(product);
+      res.send(result);
+    });
+
+    app.post("/my-equipment", async (req, res) => {
+      const { email } = req.body;
+      const cursor = productsCollection.find({ userEmail: email });
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.get("/products-sorted", async (req, res) => {
+      const query = req.query.sort;
+      let cursor;
+      if (query === "ascending") {
+        cursor = await productsCollection.find().sort({ price: 1 }).toArray();
+      } else {
+        cursor = await productsCollection.find().sort({ price: -1 }).toArray();
+      }
+      res.send(cursor);
+    });
+
+    app.delete("/products/:id", async (req, res) => {
+      const result = await productsCollection.deleteOne({
+        _id: new ObjectId(req.params.id),
+      });
       res.send(result);
     });
   } finally {
