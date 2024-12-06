@@ -31,18 +31,21 @@ async function run() {
     const productsCollection = db.collection("all-products");
     const usersCollection = db.collection("users");
 
+    // adding user to mongodb along with firebase
     app.post("/users", async (req, res) => {
       const user = req.body;
       const result = await usersCollection.insertOne(user);
       res.send(result);
     });
 
+    // getting limited only 6 products for home page
     app.get("/limited-products", async (req, res) => {
       const cursor = productsCollection.find().limit(6);
       const result = await cursor.toArray();
       res.send(result);
     });
 
+    // getting selected product info via id
     app.get("/products/:id", async (req, res) => {
       const result = await productsCollection.findOne({
         _id: new ObjectId(req.params.id),
@@ -50,6 +53,7 @@ async function run() {
       res.send(result);
     });
 
+    // updating product info or partial update via update page
     app.patch("/products/:id", async (req, res) => {
       const product = req.body;
       const result = await productsCollection.updateOne(
@@ -74,17 +78,20 @@ async function run() {
       res.send(result);
     });
 
+    // gettin all products available on collection
     app.get("/all-products", async (req, res) => {
       const result = await productsCollection.find().toArray();
       res.send(result);
     });
 
+    // adding single product to the collection
     app.post("/products", async (req, res) => {
       const product = req.body;
       const result = await productsCollection.insertOne(product);
       res.send(result);
     });
 
+    // getting my added data with filtering
     app.post("/my-equipment", async (req, res) => {
       const { email } = req.body;
       const cursor = productsCollection.find({ userEmail: email });
@@ -92,6 +99,7 @@ async function run() {
       res.send(result);
     });
 
+    // sorting product based on their price as ascending or descending
     app.get("/products-sorted", async (req, res) => {
       const query = req.query.sort;
       let cursor;
@@ -103,6 +111,7 @@ async function run() {
       res.send(cursor);
     });
 
+    // deleting product via id
     app.delete("/products/:id", async (req, res) => {
       const result = await productsCollection.deleteOne({
         _id: new ObjectId(req.params.id),
