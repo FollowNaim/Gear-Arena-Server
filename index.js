@@ -100,7 +100,7 @@ async function run() {
       let cursor;
       if (query === "ascending") {
         cursor = await productsCollection.find().sort({ price: 1 }).toArray();
-      } else {
+      } else if (query === "descending") {
         cursor = await productsCollection.find().sort({ price: -1 }).toArray();
       }
       res.send(cursor);
