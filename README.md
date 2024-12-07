@@ -25,8 +25,10 @@ The backend for **GearArena**, a sports equipment e-commerce platform, built wit
 
 ### Products
 
-- `GET /api/all-products`: Fetch all products.
-- `GET /api/limited-products`: Fetch limited products for homepage design.
+- `GET /api/products`: Fetch all products.
+- `GET /api/products?limit=your_limit`: Fetch limited products.
+- `GET /api/products?sort=[ascending or descending]`: Sort the products.
+- `GET /api/products?limit=your_limit&sort=[ascending or descending]`: Limit the products and then Sort them.
 - `POST /api/products`: Add a new product (Admin only).
 - `GET /api/products/:id`: Fetch product details by ID.
 - `PUT /api/products/:id`: Update product details (Admin only).
