@@ -40,7 +40,7 @@ async function run() {
 
     // gettin all products available on collection and getting limited data when using limit query and getting sorted data along with limit when using sort query
     app.get("/products", async (req, res) => {
-      // default variable to return always
+      // default variable to add result and return always
       let result;
       // checking if query has sort and limit both then will work this
       if (req.query.sort && req.query.limit) {
