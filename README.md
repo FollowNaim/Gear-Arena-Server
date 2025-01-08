@@ -40,7 +40,7 @@ The backend for **GearArena**, a sports equipment e-commerce platform, built wit
 
 ---
 
-## Technologies Used
+## ⚙️ Technologies Used
 
 - **Node.js**: Backend runtime environment.
 - **Express**: Framework for building RESTful APIs.
@@ -50,13 +50,55 @@ The backend for **GearArena**, a sports equipment e-commerce platform, built wit
 
 ---
 
-## Deployment
+## 📦 Dependencies
 
-The server is hosted on **Vercel**.
+- **cors** (^2.8.5) – A Node.js middleware to enable Cross-Origin Resource Sharing (CORS) for your Express app.
+- **dotenv** (^16.4.6) – A library to load environment variables from a `.env` file into `process.env`.
+- **express** (^4.21.1) – A web application framework for Node.js, used to build APIs and server-side applications.
+- **mongodb** (^6.11.0) – A Node.js driver for MongoDB, allowing interaction with a MongoDB database.
 
 ---
 
-## Contributing
+## 🔧 How to Run
+
+1. **Clone the repository.**
+
+```bash
+   git clone https://github.com/FollowNaim/Gear-Arena-Server
+   cd Gear-Arena-Server
+```
+
+2. **Install Dependencies**
+
+```bash
+npm install
+```
+
+3. **Setup Environment Variables**
+
+- create .env in the root directory.
+- create a collection on mongodb atlas.
+- Add `DB_USER, DB_PASS` variable and add your database username and password.
+
+4. **Run the application**
+
+```bash
+npm run dev
+```
+
+5. **Access the app**
+
+- Open http://localhost:5000 in your browser.
+
+---
+
+## 🛠️ Deployment
+
+- Hosted on Netlify or Vercel for a fast and reliable experience.
+
+---
+
+## 🤝 Contributing
 
 Contributions are welcome! To contribute:
 
@@ -65,12 +107,6 @@ Contributions are welcome! To contribute:
 3. Commit your changes: `git commit -m "Add feature name"`.
 4. Push to the branch: `git push origin feature-name`.
 5. Submit a pull request.
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
